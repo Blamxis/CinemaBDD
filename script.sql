@@ -22,7 +22,7 @@ ALTER TABLE utilisateur ADD FOREIGN KEY (Id_cinema) REFERENCES cinema(Id_cinema)
 CREATE TABLE salle (
     Id_salle INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     Nom VARCHAR(100) NOT NULL,
-    Capacite INT NOT NULL,
+    Capacite INT NOT NULL CHECK (Capacite > 0),
     Id_cinema INT NOT NULL
 );
 
@@ -42,13 +42,13 @@ ALTER TABLE seance ADD FOREIGN KEY (Id_salle) REFERENCES salle(Id_salle);
 CREATE TABLE film (
     Id_film INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     Titre VARCHAR(100) NOT NULL,
-    Duree INT NOT NULL,
+    Duree INT NOT NULL CHECK (Duree > 0),
     Categorie VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE reservation (
     Id_reservation INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    Nb_places INT NOT NULL,
+    Nb_places INT NOT NULL CHECK (Nb_places > 0),
     Id_seance INT NOT NULL,
     Id_tarif INT NOT NULL
 );
@@ -59,7 +59,7 @@ ALTER TABLE reservation ADD FOREIGN KEY (Id_tarif) REFERENCES tarif(Id_tarif);
 CREATE TABLE tarif (
     Id_tarif INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     Description VARCHAR(255) NOT NULL,
-    Prix INT NOT NULL
+    Prix INT NOT NULL CHECK (Prix > 0)
 );
 
 CREATE TABLE numticket (
